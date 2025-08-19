@@ -1,0 +1,32 @@
+body {
+    background-image: url("images/M-U.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;    /* Prevent tiling */
+    height: 100vh;                    /* Full viewport height */
+    margin: 0;                        /* Remove default body margin */
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+h1 {
+    color: turquoise;
+    font-size: 2.54rem;
+    margin-bottom: 20px;
+}
+textarea {
+    width: 80%;
+    height: 200px;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none; /* remove default focus outline */
+    resize: vertical; /* allow vertical resizing only */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* subtle shadow */
+    transition: border-color 0.3s, box-shadow 0.3s; /* smooth focus animation */
+}
+textarea:focus {
+    border-color: turquoise;
+    box-shadow: 0 0 8px rgba(64, 224, 208, 0.5);
+}
