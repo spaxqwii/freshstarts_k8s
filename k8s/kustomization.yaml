@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: argocd  # everything will land here
+
+resources:
+  - login-pg-deployment.yaml
+  - login-pg-service.yaml
+  - login-pg-ingress.yaml
+  - argocd-ingress.yaml
+
+labels:
+  - pairs:
+      repo: freshstarts_k8s
+
+images:
+  - name: login-pg
+    newName: login-pg
+    newTag: latest
+
+
