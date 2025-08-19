@@ -4,6 +4,7 @@ metadata:
   name: login-app-ingress
   namespace: myapp
   annotations:
+    argocd.argoproj.io/sync-wave: "4"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
