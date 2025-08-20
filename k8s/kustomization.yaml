@@ -3,18 +3,23 @@ kind: Kustomization
 namespace: argocd  # everything will land here
 
 resources:
+  - myapp-namespace.yaml 
   - login-pg-deployment.yaml
   - login-pg-service.yaml
   - login-pg-ingress.yaml
+  - login-pg-sealedsecret.yaml
   - argocd-ingress.yaml
+  - postgres-pvc-deployment.yaml
+  - postgres-sealedsecret.yaml
+  - postgres-service.yaml
 
 labels:
   - pairs:
-      repo: freshstarts_k8s
+      repo: freshstarts_k8s/k8s
 
 images:
-  - name: login-pg
-    newName: login-pg
-    newTag: latest
+  - name: freshstarts_k8s
+    newName: freshstarts_k8s
+    newTag: v1.2
 
 
