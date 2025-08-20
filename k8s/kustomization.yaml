@@ -20,6 +20,9 @@ labels:
 images:
   - name: freshstarts_k8s
     newName: freshstarts_k8s
-    newTag: v1.2
-
-
+    newTag: v1.1
+commonSpec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: ghcr-cred
