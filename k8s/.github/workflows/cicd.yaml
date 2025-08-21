@@ -1,0 +1,33 @@
+name: CI/CD for login-app
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build Docker image
+        run: |
+          IMAGE=ghcr.io/${{ github.repository }}/freshstarts_k8s
+          TAG=${{ github.sha }}
+          echo "IMAGE=$IMAGE:$TAG" >> $GITHUB_ENV
+          docker build -t $IMAGE:$TAG .
+
+      - name: Push Docker image
+        run: docker push $IMAGE:${{ github.sha }}
+
+      - name: Update Kubernetes manifest
+        run: |
+          sed -i "s|image:.*|image: ghcr.io/${{ github.repository }}:${{ github.sha }}|" k8s/Frontend/login-pg-deployment.yaml
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -am "Update image tag to ${{ github.sha }}"
+          git push

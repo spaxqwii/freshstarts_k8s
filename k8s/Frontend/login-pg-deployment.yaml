@@ -18,7 +18,7 @@ spec:
       containers:
       - name: login-app
         image: ghcr.io/spaxqwii/freshstarts_k8s:v1.1
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         env:
