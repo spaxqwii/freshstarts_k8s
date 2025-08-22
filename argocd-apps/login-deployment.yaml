@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: login-app
+  namespace: argocd   # ArgoCD always manages Applications in its own namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/spaxqwii/freshstarts_k8s.git
+    targetRevision: main
+    path: k8s/login-app-yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myapp
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

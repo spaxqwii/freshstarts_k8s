@@ -1,0 +1,9 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+spec:
+  selfSigned: {}
+  # This issuer will create self-signed certificates
+  # that can be used for testing or internal purposes.  In a production
+  # environment, consider using a CA or ACME issuer for trusted certificates.     

@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: login-app-cert
+  namespace: myapp
+spec:
+  secretName: login-app-tls   # cert-manager will create this Secret
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+  dnsNames:
+  - login-pg.local
+  # List of DNS names for which the certificate should be valid
+  # This should match the host in your Ingress resource

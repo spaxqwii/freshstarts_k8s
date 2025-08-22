@@ -5,8 +5,14 @@ metadata:
   namespace: myapp
   annotations:
     argocd.argoproj.io/sync-wave: "4"
+    cert-manager.io/cluster-issuer: "selfsigned-issuer"   # reference the self-signed issuer
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - login-pg.local
+    secretName: login-app-tls   # cert-manager will create this secret
   rules:
   - host: login-pg.local
     http:
